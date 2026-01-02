@@ -59,7 +59,7 @@ const App = () => {
                 surahTitleStyles={{
                     color: 'black',
                 }}
-                fixedAspectRation={true}
+                fixedAspectRatio={true}
             />
         </div>
     )
@@ -83,7 +83,7 @@ This could not have been achieved without the grace of Allāh, who helped us to 
 - [Tanzil](https://tanzil.net/)
   for providing a lot of valudable data such as Qur'ān text
 
-![resources](images/resources-logo.png "Logos of the resources")
+![resources](images/resources-logo.png 'Logos of the resources')
 
 If you have any useful resources that can make this project better, please open an [issues](https://github.com/6km/react-quran/issues) and share it!
 
