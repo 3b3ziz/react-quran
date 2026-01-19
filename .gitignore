@@ -6,5 +6,5 @@ yarn.lock
 # logs
 storybook.log
 
-# build files
-dist/
+# build files (commented out to allow GitHub installs)
+# dist/
