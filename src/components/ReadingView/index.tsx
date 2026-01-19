@@ -90,9 +90,17 @@ export const ReadingView = memo(function ReadingView({
     // Fire callback with page info when page changes
     useEffect(() => {
         if (onPageInfo) {
-            const surahsOnPage = [...new Set(
-                pageLines.flatMap(words => words.map(w => w.chapter_id))
-            )]
+            // Collect unique surah IDs manually
+            const surahSet = new Set<number>()
+            for (const line of pageLines) {
+                for (const word of line) {
+                    if (word.chapter_id !== undefined) {
+                        surahSet.add(word.chapter_id)
+                    }
+                }
+            }
+            const surahsOnPage = Array.from(surahSet)
+            console.log('surahsOnPage:', surahsOnPage)
             onPageInfo({ page: pageNumber, surahs: surahsOnPage })
         }
     }, [pageNumber, pageLines, onPageInfo])
