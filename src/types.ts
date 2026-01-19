@@ -26,6 +26,11 @@ export type ProcessedWord = Word & {
     is_start: boolean
 }
 
+export type PageInfo = {
+    page: number
+    surahs: number[]  // Surah IDs present on this page
+}
+
 export type ReadingViewProps = {
     page?: number | string
 
@@ -46,6 +51,12 @@ export type ReadingViewProps = {
      * @default true
      */
     fixedAspectRatio?: boolean
+
+    /**
+     * Callback fired when page info is available.
+     * Returns the current page number and surah IDs on the page.
+     */
+    onPageInfo?: (info: PageInfo) => void
 }
 
 export type LineProps = {

@@ -1,4 +1,4 @@
-import { Fragment, memo, useMemo } from 'react'
+import { Fragment, memo, useEffect, useMemo } from 'react'
 import clipboardCopy from 'clipboard-copy'
 import styled from 'styled-components'
 
@@ -77,6 +77,7 @@ export const ReadingView = memo(function ReadingView({
     readingViewStyles = {},
     surahTitleStyles = {},
     fixedAspectRatio = true,
+    onPageInfo,
 }: ReadingViewProps) {
     const [pageNumber, pageLines] = useMemo(() => {
         const pageNumber = getValidPageNumber(page)
@@ -85,6 +86,16 @@ export const ReadingView = memo(function ReadingView({
 
         return [pageNumber, pageLines]
     }, [page])
+
+    // Fire callback with page info when page changes
+    useEffect(() => {
+        if (onPageInfo) {
+            const surahsOnPage = [...new Set(
+                pageLines.flatMap(words => words.map(w => w.chapter_id))
+            )]
+            onPageInfo({ page: pageNumber, surahs: surahsOnPage })
+        }
+    }, [pageNumber, pageLines, onPageInfo])
 
     const styles = useMemo(() => ({ width: '440px', ...readingViewStyles, overflow: 'visible' }), [readingViewStyles])
 
